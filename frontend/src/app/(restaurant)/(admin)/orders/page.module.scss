@@ -1,0 +1,72 @@
+.container {
+
+  @include media('>iPad') {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    grid-template-rows: min-content 1fr;
+    align-items: start;
+  }
+
+  .title {
+    font-size: 3.2rem;
+    line-height: 1;
+    font-weight: bold;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid black;
+    grid-column: 1/-1;
+
+    @include media('>iPad') {
+      margin-bottom: 32px;
+    }
+
+  }
+
+  .list {
+    display: flex;
+    grid-column: 1/-1;
+    grid-row: 3;
+    align-items: start;
+    justify-content: start;
+    align-content: start;
+    flex-wrap: wrap;
+  }
+
+  .order {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid black;
+    text-align: center;
+
+    @include media('>mediumPhone') {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include media('>iPad') {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  .label {
+    min-height: 20px;
+    font-size: 1.6rem;
+  }
+
+  .value {
+    font-weight: bold;
+    font-size: 1.6rem;
+
+    &.active {
+      color: var(--color-success);
+    }
+  }
+
+  .empty {
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+}

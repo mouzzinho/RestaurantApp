@@ -1,0 +1,68 @@
+.dish {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  font-weight: bold;
+  border: 1px solid var(--color-primary-active);
+  border-radius: 8px;
+  padding: 16px;
+
+  .image {
+    max-width: 150px;
+    width: calc(50% - 16px);
+
+    img {
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .data {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name,.price {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+
+    @include media('>phone') {
+      font-size: 1.6rem;
+    }
+  }
+
+  .input {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    button:first-of-type {
+      margin-right: 12px;
+    }
+
+    button:last-of-type {
+      margin-left: 12px;
+    }
+
+    input {
+      width: 46px;
+      text-align: center;
+    }
+  }
+
+  .delete {
+    position: absolute;
+    right: -8px;
+    top: -16px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-weight: bold;
+    font-size: 1.3rem;
+    line-height: 1;
+    background: var(--color-error);
+    min-width: unset;
+    border: none;
+  }
+}

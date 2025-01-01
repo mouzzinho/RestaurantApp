@@ -1,0 +1,212 @@
+.container {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+
+  & .labelBox {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  &.error {
+
+    .dropzone {
+      border: 1px dashed var(--color-error);
+      background: var(--color-error-light);
+
+      .upload {
+        fill: var(--color-error);
+      }
+    }
+
+    .dropzoneContent {
+      color: var(--color-error);
+    }
+
+    :global(.error-message) {
+      margin-top: 4px;
+      font-weight: 500;
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .dropzone {
+
+      &::after {
+        border: 1px dashed var(--color-primary);
+        opacity: 0.25;
+      }
+
+      &::before {
+        background: currentColor;
+        opacity: 0.1;
+      }
+    }
+
+    .dropzoneContent {
+      opacity: 0.5;
+    }
+  }
+}
+
+.dropzone {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2em;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--color-primary);
+  height: 150px;
+  max-height: 150px;
+
+  @media (hover:hover) {
+    &:focus-within {
+      box-shadow: 0 0 3px var(--color-primary);
+    }
+
+    &:hover,
+    &:focus-within {
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &::after {
+    border: 1px dashed var(--color-primary);
+    opacity: 0.5;
+  }
+
+  &::before {
+    opacity: 0.5;
+  }
+}
+
+.dropzoneContent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.gallery {
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: repeat(auto-fill, 150px);
+}
+
+.fileBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &::before {
+    opacity: 0.2;
+  }
+
+  .buttonDelete {
+    flex-shrink: 0;
+  }
+
+  .trash {
+    width: 35%;
+    height: 35%;
+  }
+}
+
+.fileName {
+  flex-grow: 1;
+  word-break: break-all;
+  padding: 1em;
+}
+
+.imageBox {
+  aspect-ratio: 1;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--color-primary);
+
+  @media (hover: hover) {
+
+    & .buttonDelete {
+      opacity: 0;
+    }
+  }
+
+  &:hover,
+  &:focus-within {
+
+    .image {
+      opacity: 0.5;
+    }
+
+    .buttonDelete {
+      opacity: 1;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    opacity: 0.5;
+  }
+
+  .buttonDelete {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 0;
+    min-height: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .trash {
+    width: 75%;
+    height: 75%;
+    fill: var(--color-error);
+  }
+}
+
+.upload {
+  fill: var(--color-primary);
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

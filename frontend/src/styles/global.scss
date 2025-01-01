@@ -1,0 +1,40 @@
+:root {
+  --color-primary: #A594F9;
+  --color-primary-light: #eee9ff;
+  --color-primary-active: #6461f8;
+  --color-secondary: #E5D9F2;
+  --color-icon-active: #2e2cdd;
+  --color-black: #333333;
+  --color-white: #FFFFFF;
+  --color-error: #dc2828;
+  --color-error-light: #fbf0f0;
+  --color-success: #258f3a;
+  --color-edit: #f4ab4d;
+  --color-input-disabled: rgba(239, 239, 239, 0.3);
+  --color-button-disabled: rgba(60, 60, 60, 0.3);
+  --header-height: 76px;
+  --header-height-mobile: 64px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: baseline;
+  font-family: 'Inter', 'Inter Fallback', sans-serif;
+  font-size: 10px;
+}
+
+a {
+  display: block;
+}
+
+.Toastify {
+  --toastify-toast-width: 360px;
+
+  .Toastify__toast-body * {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}

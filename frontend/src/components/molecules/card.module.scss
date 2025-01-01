@@ -1,0 +1,77 @@
+.container {
+  width: 100%;
+  aspect-ratio: 0.9;
+  padding: 10px;
+  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid var(--color-primary-active);
+  cursor: pointer;
+  background: unset;
+
+  &.disabled {
+    pointer-events: none;
+    color: var(--color-error);
+    opacity: 0.6;
+  }
+
+  &:hover {
+    color: var(--color-primary-active);
+  }
+
+  @include media('>mediumPhone') {
+    width: calc((100% / 2) - 8px);
+  }
+
+  @include media('>phone') {
+    width: calc((100% / 3) - 11px);
+  }
+
+  @include media('>laptop') {
+    width: calc((100% / 4) - 12px);
+  }
+
+  @include media('>desktop') {
+    width: calc((100% / 6) - 13.5px);
+  }
+
+  .name {
+    font-size: 1.4rem;
+    height: 34px;
+    text-align: center;
+  }
+
+  .image {
+    width: 100%;
+    max-width: 150px;
+    aspect-ratio: 1;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .price, .quantity {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: auto 0 20px;
+  }
+
+  .quantity {
+    color: #bf9706;
+
+    &.low {
+      color: var(--color-error);
+    }
+
+    &.high {
+      color: var(--color-success);
+    }
+  }
+}

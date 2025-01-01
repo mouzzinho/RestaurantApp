@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 440px;
+  margin: calc(var(--header-height-mobile) * -1) auto 0;
+
+  @include media('>phone') {
+    margin: calc(var(--header-height) * -1) auto 0;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 46px;
+  }
+
+  .form {
+    border-radius: 12px;
+    border: 1px solid var(--color-primary);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 360px;
+
+    button {
+      margin-top: 32px;
+      width: 100%;
+    }
+  }
+}

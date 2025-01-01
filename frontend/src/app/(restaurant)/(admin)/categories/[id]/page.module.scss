@@ -1,0 +1,12 @@
+.container {
+  padding: 16px;
+
+  @include media('>phone') {
+    padding: 32px;
+  }
+
+  .form {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+  }
+}

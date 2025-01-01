@@ -1,0 +1,89 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include media('>phone') {
+    grid-column: 1/-1;
+    grid-row: 3;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--color-primary-active);
+    border-radius: 8px;
+
+    @include media('>phone') {
+      flex-direction: row;
+      border: none;
+      padding: 0;
+    }
+  }
+
+  .ingredient {
+    width: 100%;
+
+    @include media('>phone') {
+      width: calc(50% - 32px/3);
+    }
+  }
+
+  .quantity {
+    width: 100%;
+
+    @include media('>phone') {
+      width: calc(30% - 32px/3);
+    }
+  }
+
+  .unit {
+    width: 100%;
+
+    @include media('>phone') {
+      width: calc(20% - 32px/3);
+    }
+  }
+
+  .delete {
+    background: var(--color-error);
+    border: unset;
+    display: flex;
+    align-self: end;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    svg {
+      width: 20px;
+    }
+  }
+}
+
+.button {
+  border: none;
+  background: var(--color-edit);
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  height: 39px;
+  font-size: 1.2rem;
+  margin-top: 19px;
+
+  @include media('>phone') {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    background: var(--color-button-disabled);
+  }
+}

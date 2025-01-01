@@ -1,0 +1,109 @@
+.container {
+  position: fixed;
+  background-color: var(--color-primary-light);
+  top: var(--header-height-mobile);
+  height: calc(100% - var(--header-height-mobile));
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 32px 16px;
+  right: 0;
+  width: 100%;
+  transform: translateX(calc(100% - 64px));
+  transition: transform .2s ease-in-out;
+
+  &.open {
+    overflow-y: auto;
+    transform: translateX(0);
+
+    .wrapper, .status {
+      transform: translateX(0);
+    }
+  }
+
+  &.mainpage {
+    transform: translateX(100%);
+
+    &.open {
+      transform: translateX(0);
+
+      .wrapper {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  @include media('>phone') {
+    top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  @include media('>tablet') {
+    width: 720px;
+  }
+
+  .button {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: var(--color-primary-active);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 20px;
+      height: 20px;
+
+      path {
+        fill: white;
+      }
+    }
+  }
+
+  .toggle {
+    left: 16px;
+    top: 16px;
+  }
+
+  .name {
+    position: absolute;
+    left: 50%;
+    top: 22px;
+    font-size: 2rem;
+    font-weight: bold;
+    transform: translateX(-50%);
+
+    @include media('>phone') {
+      font-size: 2.4rem;
+      top: 18px;
+    }
+  }
+
+  .wrapper {
+    margin: 32px 0;
+    width: 100%;
+    transform: translateX(64px);
+    transition: transform .2s ease-in-out;
+  }
+
+  .status {
+    transform: translateX(64px);
+    transition: transform .2s ease-in-out;
+    position: relative;
+    z-index: 3;
+  }
+
+  .order,.edit {
+    margin: 0 auto;
+    width: 320px;
+  }
+
+  .order {
+    background: var(--color-success);
+  }
+
+  .edit {
+    background: var(--color-edit);
+  }
+}

@@ -1,0 +1,217 @@
+.container {
+  --color-border-input: var(--color-primary);
+  --color-text-input: var(--color-black);
+  --color-background-input: trasparent;
+
+  &.error {
+    --color-border-input: var(--color-error);
+    --color-text-input: var(--color-error);
+    --color-background-input: var(--color-error-light);
+
+    :global(.react-select__placeholder) {
+      color: var(--color-text-input);
+    }
+  }
+
+  &.disabled {
+    --color-background-input: rgba(239, 239, 239, 0.3);
+    color: rgb(84, 84, 84);
+
+    .select {
+      pointer-events: none;
+    }
+
+    :global(.react-select__control::after) {
+      opacity: 0.25;
+    }
+
+    :global(.react-select__control::before) {
+      opacity: 0.1;
+    }
+
+    &.required {
+
+      .select-box {
+
+        &::after {
+          filter: grayscale(1);
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+.select-box {
+  position: relative;
+  font-size: 1.2rem;
+
+  &:focus-within,
+  &:hover {
+    .icon-box {
+      opacity: 1;
+    }
+  }
+
+  &.has-icon {
+
+    :global(.react-select__value-container) {
+      margin-left: 2.5em;
+    }
+  }
+}
+
+.icon-box {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1.75em;
+  width: 1.75em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transform: translate(1.2em, -50%);
+  opacity: 0.5;
+}
+
+.icon-svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.label {
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.errorText {
+  margin-top: 4px;
+  font-size: 1.2rem;
+  color: var(--color-text-input);
+}
+
+
+.select {
+  font-size: inherit;
+  width: 100%;
+
+  :global(.react-select__control) {
+    font: inherit;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-input);
+    background: var(--color-background-input);
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      opacity: 0.5;
+    }
+
+    &:hover {
+
+      &::after {
+        opacity: 1;
+      }
+
+      .react-select__indicator {
+        opacity: 1;
+      }
+    }
+  }
+
+  :global(.react-select__control--is-focused) {
+    box-shadow: 0 0 3px var(--color-primary);
+
+    &::after {
+      opacity: 1;
+    }
+
+    .react-select__indicator {
+      opacity: 1;
+    }
+  }
+
+  :global(.react-select__multi-value__label) {
+    padding: 0 2px;
+    font: inherit;
+  }
+
+  :global(.react-select__value-container) {
+    padding: 1em;
+  }
+
+  :global(.react-select__input-container) {
+    padding: 0;
+    margin: 0;
+  }
+
+  :global(.react-select__indicator-separator) {
+    display: none;
+  }
+
+  :global(.react-select__indicator) {
+    color: var(--color-primary);
+  }
+
+  :global(.react-select__single-value) {
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    white-space: initial;
+    font-size: 1.4rem;
+  }
+
+  :global(.react-select__menu) {
+    font: inherit;
+    border: 1px solid var(--color-border-input);
+    border-top: none;
+    border-radius: 8px;
+    margin: 0;
+  }
+
+  :global(.react-select__control--menu-is-open) {
+    .react-select__dropdown-indicator {
+      transform: rotate(180deg);
+    }
+  }
+
+  :global(.react-select__menu-list) {
+    padding: 0.5em 0;
+  }
+
+  :global(.react-select__option) {
+    background: transparent;
+    padding: 0.2em 0.75em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  :global(.react-select__option--is-focused) {
+    color: var(--color-primary);
+    background: transparent;
+  }
+
+  :global(.react-select__option--is-selected) {
+    color: var(--color-primary);
+    background: transparent;
+  }
+
+  :global(.react-select__option--is-disabled) {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  :global(.react-select__placeholder) {
+    font-size: 1.4rem;
+  }
+
+  :global(.react-select__multi-value) {
+    margin: 2px;
+  }
+
+}

@@ -1,0 +1,27 @@
+.container {
+
+  @include media('>iPad') {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    grid-template-rows: min-content 1fr;
+    align-items: start;
+  }
+
+  .title {
+    font-size: 3.2rem;
+    line-height: 1;
+    font-weight: bold;
+    margin-bottom: 16px;
+
+    @include media('>iPad') {
+      margin-bottom: 32px;
+    }
+
+  }
+
+  .button {
+    font-size: 1.6rem;
+    width: 240px;
+    margin-bottom: 16px;
+  }
+}

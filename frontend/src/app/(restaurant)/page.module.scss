@@ -1,0 +1,13 @@
+.container {
+  max-width: 100%;
+  max-height: calc(100vh - var(--header-height-mobile));
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  @include media('>phone') {
+    max-height: calc(100vh - var(--header-height));
+  }
+}
+

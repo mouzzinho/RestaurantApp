@@ -1,0 +1,51 @@
+.container {
+
+  @include media('>iPad') {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    grid-template-rows: min-content 1fr;
+    align-items: start;
+  }
+
+  .title {
+    font-size: 3.2rem;
+    line-height: 1;
+    font-weight: bold;
+    margin-bottom: 16px;
+
+    @include media('>iPad') {
+      margin-bottom: 32px;
+    }
+
+  }
+
+  .button {
+    font-size: 1.6rem;
+    width: 240px;
+    margin-bottom: 16px;
+  }
+
+  .search {
+    grid-row: 2;
+    grid-column: 1/-1;
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid black;
+  }
+
+  .list {
+    display: flex;
+    grid-column: 1/-1;
+    grid-row: 3;
+    align-items: start;
+    justify-content: start;
+    align-content: start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .empty {
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+}
