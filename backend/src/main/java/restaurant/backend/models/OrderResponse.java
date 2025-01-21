@@ -4,12 +4,12 @@ import java.util.List;
 
 public class OrderResponse {
     private Integer id;
-    private String orderDate;
+    private Long orderDate;
     private Integer status;
     private Integer tableId;
     private List<DishWithQuantity> dishes;
 
-    public OrderResponse(Integer id, String orderDate, Integer status, Integer tableId, List<DishWithQuantity> dishes) {
+    public OrderResponse(Integer id, Long orderDate, Integer status, Integer tableId, List<DishWithQuantity> dishes) {
         this.id = id;
         this.orderDate = orderDate;
         this.status = status;
@@ -20,8 +20,8 @@ public class OrderResponse {
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
-    public String getOrder_date() { return orderDate; }
-    public void setOrder_date(String order_date) { this.orderDate = order_date; }
+    public Long getOrder_date() { return orderDate; }
+    public void setOrder_date(Long order_date) { this.orderDate = order_date; }
 
     public Integer getStatus() { return status; }
     public void setStatus(Integer status) { this.status = status; }

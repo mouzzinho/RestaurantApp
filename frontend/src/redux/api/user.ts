@@ -1,13 +1,13 @@
 import restaurantApi from './base';
 
 import { TLoginFormValues } from '@/forms/login.form';
-import { IUser } from '@/models/user';
+import { IUser, IUserWorktime } from '@/models/user';
 import { ITokenData } from '@/models/token-data';
 import { IPasswordChangeValues } from '@/components/organizms/password-form';
 
 export const userApi = restaurantApi
     .enhanceEndpoints({
-        addTagTypes: ['User', 'Users'],
+        addTagTypes: ['User', 'Users', 'Worktime'],
     })
     .injectEndpoints({
         endpoints: (builder) => ({
@@ -18,6 +18,10 @@ export const userApi = restaurantApi
                 query: () => `/users`,
                 providesTags: ['Users'],
             }),
+            getUserWorktime: builder.query<IUserWorktime[], { id: string | number; year?: number | string; month?: number | string }>({
+                query: ({ id, year, month }) => `/users/${id}/worktime?year=${year}&month=${month}`,
+                providesTags: ['Worktime'],
+            }),
             createUser: builder.mutation<IUser, IUser>({
                 query: (data) => ({
                     method: 'POST',
@@ -26,6 +30,14 @@ export const userApi = restaurantApi
                 }),
                 invalidatesTags: ['User', 'Users'],
             }),
+            createUserWorktime: builder.mutation<void, IUserWorktime>({
+                query: (data) => ({
+                    method: 'POST',
+                    url: `/users/${data.user_id}/worktime`,
+                    body: data,
+                }),
+                invalidatesTags: ['Worktime'],
+            }),
             updateUser: builder.mutation<IUser, { data: IUser; id: number }>({
                 query: ({ data, id }) => ({
                     method: 'PATCH',
@@ -33,6 +45,14 @@ export const userApi = restaurantApi
                     body: data,
                 }),
                 invalidatesTags: ['User', 'Users'],
+            }),
+            updateUserWorktime: builder.mutation<void, IUserWorktime>({
+                query: (data) => ({
+                    method: 'PATCH',
+                    url: `/users/${data.user_id}/worktime/${data.id}`,
+                    body: data,
+                }),
+                invalidatesTags: ['Worktime'],
             }),
             deleteUser: builder.mutation<void, { id: string | number }>({
                 query: ({ id }) => ({
@@ -70,10 +90,13 @@ export const userApi = restaurantApi
 export const {
     useGetUsersQuery,
     useGetUserQuery,
-    useCreateUserMutation,
-    useUpdateUserMutation,
-    useDeleteUserMutation,
     useGetUserAuthQuery,
+    useGetUserWorktimeQuery,
+    useCreateUserMutation,
+    useCreateUserWorktimeMutation,
+    useUpdateUserMutation,
+    useUpdateUserWorktimeMutation,
+    useDeleteUserMutation,
     useLoginUserMutation,
     useLogoutUserMutation,
     useChangePasswordMutation,

@@ -15,6 +15,7 @@ export interface ITableWithOrder extends ITable {
 
 export interface ITableMutation {
     name: string;
+    user_name: string | null;
     status: TTableStatus;
     order?: IOrder;
 }

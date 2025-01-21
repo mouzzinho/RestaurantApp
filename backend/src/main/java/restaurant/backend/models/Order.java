@@ -12,7 +12,7 @@ public class Order {
     private Integer status;
 
     @Column(name = "order_date")
-    private String orderDate;
+    private Long orderDate;
 
     @Column(name = "table_id")
     private Integer tableId;
@@ -22,7 +22,7 @@ public class Order {
 
     public Order() {}
 
-    public Order(Integer id, Integer tableId, String orderDate, Integer status) {
+    public Order(Integer id, Integer tableId, Long orderDate, Integer status) {
         this.id = id;
         this.tableId = tableId;
         this.orderDate = orderDate;
@@ -35,8 +35,8 @@ public class Order {
     public Integer getTableId() { return tableId; }
     public void setTableId(Integer tableId) { this.tableId = tableId; }
 
-    public String getOrderDate() { return orderDate; }
-    public void setOrderDate(String orderDate) { this.orderDate = orderDate; }
+    public Long getOrderDate() { return orderDate; }
+    public void setOrderDate(Long orderDate) { this.orderDate = orderDate; }
 
     public Integer getStatus() { return status; }
     public void setStatus(Integer status) { this.status = status; }

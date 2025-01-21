@@ -12,26 +12,36 @@ import {
     useLoginUserMutation,
     useLogoutUserMutation,
     useChangePasswordMutation,
+    useGetUserWorktimeQuery,
+    useUpdateUserWorktimeMutation,
+    useCreateUserWorktimeMutation,
 } from '@/redux/api/user';
 import { getUserTokenData } from '@/utils/getUserTokenData';
 import { selectUserState } from '@/redux/slices/user.slice';
 
-export const useUser = (query?: 'single' | 'list' | 'auth') => {
+export const useUser = (query?: 'single' | 'list' | 'auth' | 'worktime', date?: { year: number; month: number }, userId?: string) => {
     const params = useParams();
-    const id = params && params.id && typeof params.id === 'string' ? params.id : '';
+    const id = userId ? userId : params && params.id && typeof params.id === 'string' ? params.id : '';
     const userState = useSelector(selectUserState);
     const tokenData = getUserTokenData();
     const isTokenExpired = tokenData?.isTokenExpired || false;
     const skipSingleQuery = query !== 'single' || !id;
     const skipListQuery = query !== 'list';
     const skipAuthQuery = query !== 'auth';
+    const skipWorktimeQuery = query !== 'worktime' || !date;
 
     const getUserQuery = useGetUserQuery({ id }, { skip: skipSingleQuery });
     const getUsersQuery = useGetUsersQuery(undefined, { skip: skipListQuery });
     const getUserAuthQuery = useGetUserAuthQuery(undefined, { skip: skipAuthQuery });
+    const getUserWorktimeQuery = useGetUserWorktimeQuery(
+        { id, year: date ? date.year : '', month: date ? date.month : '' },
+        { skip: skipWorktimeQuery },
+    );
 
     const [create, createUserMutation] = useCreateUserMutation();
+    const [createWorktime, createWorktimeMutation] = useCreateUserWorktimeMutation();
     const [update, updateUserMutation] = useUpdateUserMutation();
+    const [updateWorktime, updateUserWorktimeMutation] = useUpdateUserWorktimeMutation();
     const [deleteUser, deleteUserMutation] = useDeleteUserMutation();
     const [login, loginUserMutation] = useLoginUserMutation();
     const [logout, logoutUserMutation] = useLogoutUserMutation();
@@ -64,6 +74,14 @@ export const useUser = (query?: 'single' | 'list' | 'auth') => {
             isError: getUsersQuery.isError,
             errors: getUsersQuery.error,
         },
+        worktime: {
+            data: getUserWorktimeQuery.data,
+            isFetching: getUserWorktimeQuery.isFetching,
+            isLoading: getUserWorktimeQuery.isLoading,
+            isSuccess: getUserWorktimeQuery.isSuccess,
+            isError: getUserWorktimeQuery.isError,
+            errors: getUserWorktimeQuery.error,
+        },
         getAuth: {
             data: getUserAuthQuery.data,
             isFetching: getUserAuthQuery.isFetching,
@@ -80,6 +98,14 @@ export const useUser = (query?: 'single' | 'list' | 'auth') => {
             isError: createUserMutation.isError,
             errors: createUserMutation.error,
         },
+        createWorktime: {
+            fetch: createWorktime,
+            data: createWorktimeMutation.data,
+            isLoading: createWorktimeMutation.isLoading,
+            isSuccess: createWorktimeMutation.isSuccess,
+            isError: createWorktimeMutation.isError,
+            errors: createWorktimeMutation.error,
+        },
         update: {
             fetch: update,
             data: updateUserMutation.data,
@@ -87,6 +113,14 @@ export const useUser = (query?: 'single' | 'list' | 'auth') => {
             isSuccess: updateUserMutation.isSuccess,
             isError: updateUserMutation.isError,
             errors: updateUserMutation.error,
+        },
+        updateWorktime: {
+            fetch: updateWorktime,
+            data: updateUserWorktimeMutation.data,
+            isLoading: updateUserWorktimeMutation.isLoading,
+            isSuccess: updateUserWorktimeMutation.isSuccess,
+            isError: updateUserWorktimeMutation.isError,
+            errors: updateUserWorktimeMutation.error,
         },
         deleteUser: {
             fetch: deleteUser,

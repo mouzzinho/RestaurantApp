@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurant.backend.models.User;
 import restaurant.backend.models.UserResponse;
+import restaurant.backend.models.UserWorktime;
 import restaurant.backend.repositories.UserRepository;
+import restaurant.backend.repositories.UserWorktimeRepository;
 import restaurant.backend.security.JwtUtils;
 
 @RestController
@@ -15,11 +17,13 @@ import restaurant.backend.security.JwtUtils;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserWorktimeRepository userWorktimeRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
 
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtils jwtUtils) {
+    public UserController(UserRepository userRepository, UserWorktimeRepository userWorktimeRepository, PasswordEncoder passwordEncoder, JwtUtils jwtUtils) {
         this.userRepository = userRepository;
+        this.userWorktimeRepository = userWorktimeRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
     }
@@ -41,6 +45,17 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{id}/worktime")
+    public ResponseEntity<List<UserWorktime>> getUserWorktimeByMonth(
+            @PathVariable Integer id,
+            @RequestParam Integer year,
+            @RequestParam Integer month) {
+
+        List<UserWorktime> worktimes = userWorktimeRepository.findAllByUserIdAndYearAndMonth(id, year, month);
+
+        return ResponseEntity.ok(worktimes);
     }
 
     @PostMapping
@@ -71,6 +86,40 @@ public class UserController {
         }
     }
 
+    @PostMapping("/{id}/worktime")
+    public ResponseEntity<UserWorktime> createWorktime(
+            @PathVariable Integer id,
+            @RequestBody WorktimeRequest request) {
+
+        UserWorktime worktime = new UserWorktime();
+        worktime.setUser_id(id);
+        worktime.setDate_start(request.getDate_start());
+        worktime.setDate_end(request.getDate_end());
+
+        UserWorktime savedWorktime = userWorktimeRepository.save(worktime);
+        return ResponseEntity.ok(savedWorktime);
+    }
+
+    @PatchMapping("/{id}/worktime/{worktimeId}")
+    public ResponseEntity<UserWorktime> updateWorktime(
+            @PathVariable Integer id,
+            @PathVariable Integer worktimeId,
+            @RequestBody WorktimeRequest request) {
+
+        Optional<UserWorktime> optionalWorktime = userWorktimeRepository.findByIdAndUserId(worktimeId, id);
+
+        if (optionalWorktime.isPresent()) {
+            UserWorktime worktime = optionalWorktime.get();
+            worktime.setDate_start(request.getDate_start());
+            worktime.setDate_end(request.getDate_end());
+
+            UserWorktime updatedWorktime = userWorktimeRepository.save(worktime);
+            return ResponseEntity.ok(updatedWorktime);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         Optional<User> user = userRepository.findById(id);
@@ -81,5 +130,18 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    public static class WorktimeRequest {
+        private Long date_start;
+        private Long date_end;
+
+        public WorktimeRequest() {}
+
+        public Long getDate_start() { return date_start; }
+        public void setDate_start(Long date_start) { this.date_start = date_start; }
+
+        public Long getDate_end() { return date_end; }
+        public void setDate_end(Long date_end) { this.date_end = date_end; }
     }
 }

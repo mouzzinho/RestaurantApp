@@ -10,6 +10,7 @@ public class RestaurantTable {
     private Integer id;
     private String status;
     private String name;
+    private String user_name;
     private float x;
     private float y;
     private float width;
@@ -20,9 +21,10 @@ public class RestaurantTable {
 
     public RestaurantTable() {}
 
-    public RestaurantTable(String status, String name, float x, float y, float width, float height) {
+    public RestaurantTable(String status, String name, String user_name, float x, float y, float width, float height) {
         this.status = status;
         this.name = name;
+        this.user_name = user_name;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -37,6 +39,9 @@ public class RestaurantTable {
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
+
+    public String getUser_name() {return user_name;}
+    public void setUser_name(String user_name) {this.user_name = user_name;}
 
     public OrderResponse getOrder() { return order; }
     public void setOrder(OrderResponse order) { this.order = order; }

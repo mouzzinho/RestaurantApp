@@ -1,5 +1,6 @@
 package restaurant.backend.models;
 
+import java.util.List;
 import java.util.Collection;
 import java.util.Collections;
 import jakarta.persistence.*;
@@ -26,6 +27,9 @@ public class User {
             @AttributeOverride(name = "name", column = @Column(name = "image_name"))
     })
     private ImageData image;
+
+    @Transient
+    private List<UserWorktime> userWorktime;
 
     public User() {}
 
@@ -62,6 +66,9 @@ public class User {
 
     public ImageData getImage() {return image;}
     public void setImage(ImageData image) {this.image = image;}
+
+    public List<UserWorktime> getWorktime() { return userWorktime; }
+    public void setWorktime(List<UserWorktime> userWorktime) { this.userWorktime = userWorktime; }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));

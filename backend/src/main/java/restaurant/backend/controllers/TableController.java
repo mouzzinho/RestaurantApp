@@ -78,6 +78,7 @@ public class TableController {
 
             table.setStatus(updatedTable.getStatus());
             table.setName(updatedTable.getName());
+            table.setUser_name(updatedTable.getUser_name());
 
             RestaurantTable savedTable = tableRepository.save(table);
             webSocketHandler.sendTableUpdateNotification();
@@ -97,6 +98,7 @@ public class TableController {
 
             table.setStatus(updatedTable.getStatus());
             table.setName(updatedTable.getName());
+            table.setUser_name(updatedTable.getUser_name());
 
             Optional<Order> orderOptional = orderRepository.findFirstByTableIdAndStatus(id, 1);
             if (orderOptional.isPresent()) {

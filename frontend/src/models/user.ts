@@ -12,3 +12,10 @@ export interface IUser {
     token?: string;
     expirationDate?: string;
 }
+
+export interface IUserWorktime {
+    id?: number | string;
+    user_id: number | string;
+    date_start: number;
+    date_end: number;
+}
