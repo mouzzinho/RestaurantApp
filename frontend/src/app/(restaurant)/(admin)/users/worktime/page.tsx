@@ -36,7 +36,7 @@ const Page = () => {
     const params = useSearchParams();
     const id = params.get('id') || '';
     const dispatch = useDispatch();
-    const calendarRef = useRef<CalendarProps>(null);
+    const calendarRef = useRef<CalendarProps>();
     const formRef = useRef<FormikProps<{ date_start: string; date_end: string }>>(null);
     const [selectedDate, setSelectedDate] = useState<IDateData>();
     const [yearAndMonth, setYearAndMonth] = useState(getYearAndMonth());
@@ -159,7 +159,7 @@ const Page = () => {
             >
                 {() => {
                     return (
-                        <Form className={styles.form}>
+                        <Form>
                             <p className={styles.label}>Twój grafik na dzień: {getBeautifiedDate(selectedDate)}</p>
                             <div className={styles.inputs}>
                                 <Input

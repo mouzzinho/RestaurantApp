@@ -25,7 +25,7 @@ const OrderForm: React.FC<IOrderFormProps> = ({ className = '', table, isMainPag
     const tableState = useTable();
     const orderState = useOrder();
     const orderDishes = orderState.dishes;
-    const formikRef = useRef<FormikProps<IOrderDishMutation>>(null);
+    const formikRef = useRef<FormikProps<IOrderDishMutation> | null>(null);
     const [sumValue, setSumValue] = useState(0);
 
     const handleSubmit = (values: IOrderDishMutation) => {
@@ -43,7 +43,7 @@ const OrderForm: React.FC<IOrderFormProps> = ({ className = '', table, isMainPag
                     .unwrap()
                     .then(() => {
                         tableState.update
-                            .fetch({ id: table.id, data: { name: table.name, status: 'ordered' } })
+                            .fetch({ id: table.id, data: { name: table.name, user_name: table.user_name, status: 'ordered' } })
                             .then(() => {
                                 toast('Pomyślnie edytowano zamówienie', { type: 'success' });
                                 router.replace(`/`);
@@ -100,7 +100,7 @@ const OrderForm: React.FC<IOrderFormProps> = ({ className = '', table, isMainPag
                                     key={`order-dish-field-${i}`}
                                     dishState={item}
                                     index={i}
-                                    isMainPage={isMainPage}
+                                    isMainPage={!!isMainPage}
                                     minValue={dishesFromTable?.find((dish) => dish.dish.id === item.dish.id)?.quantity}
                                 />
                             );

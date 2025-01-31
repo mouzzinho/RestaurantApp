@@ -14,7 +14,7 @@ import TableMenu from '@/components/molecules/table-menu';
 const Page = () => {
     const tableState = useTable('list');
     const tables = tableState.tables.data;
-    useWebSocket('ws://localhost:8080/ws/tables');
+    useWebSocket('ws://130.61.243.194:8080/ws/tables');
 
     const [selectedTable, setSelectedTable] = useState<ITable | null>(null);
 

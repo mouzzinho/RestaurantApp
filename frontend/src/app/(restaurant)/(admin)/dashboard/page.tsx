@@ -10,17 +10,13 @@ import UserForm from '@/components/organizms/user-form';
 import PasswordForm from '@/components/organizms/password-form';
 import Stats from '@/components/organizms/stats';
 
-interface IStatisticsProps {
-    className?: string;
-}
-
-const Page: React.FC<IStatisticsProps> = ({ className = '' }) => {
+const Page = () => {
     const userState = useUser();
     const userData = userState.data;
     const role = userData?.role;
 
     return (
-        <div className={`${styles.container} ${className}`}>
+        <div className={styles.container}>
             {role === 'ADMIN' && (
                 <>
                     <p className={styles.title}>Statystyki</p>

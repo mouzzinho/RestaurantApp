@@ -15,11 +15,11 @@ import Loader from '@/components/atoms/loader';
 const Kitchen = () => {
     const tableState = useTable('active');
     const tables = tableState.active.data;
-    useWebSocket('ws://localhost:8080/ws/tables');
+    useWebSocket('ws://130.61.243.194:8080/ws/tables');
 
     const handleOrder = (table: ITable) => {
         tableState.updateOrder
-            .fetch({ id: table.id, data: { name: table.name, status: 'prepared' } })
+            .fetch({ id: table.id, data: { name: table.name, user_name: table.user_name, status: 'prepared' } })
             .unwrap()
             .then(() => {
                 toast(`Zamówienie #${table.order?.id} zostało wydane`, { type: 'success' });

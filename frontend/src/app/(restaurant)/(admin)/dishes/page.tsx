@@ -7,13 +7,9 @@ import styles from './page.module.scss';
 import Button from '@/components/atoms/button';
 import DishesList from '@/components/organizms/dishes-list';
 
-interface IDishesProps {
-    className?: string;
-}
-
-const Page: React.FC<IDishesProps> = ({ className = '' }) => {
+const Page = () => {
     return (
-        <div className={`${className} ${styles.container}`}>
+        <div className={styles.container}>
             <p className={styles.title}>Dania</p>
             <Button as={'link'} to={'/dishes/add'} className={styles.button}>
                 Dodaj danie

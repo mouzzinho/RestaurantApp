@@ -12,11 +12,7 @@ import Card from '@/components/molecules/card';
 import Button from '@/components/atoms/button';
 import SearchBar from '@/components/molecules/search-bar';
 
-interface IUsersProps {
-    className?: string;
-}
-
-const Page: React.FC<IUsersProps> = ({ className = '' }) => {
+const Page = () => {
     const userState = useUser('list');
     const allUsers = userState.users.data;
     const [users, setUsers] = useState<IUser[]>();
@@ -39,7 +35,7 @@ const Page: React.FC<IUsersProps> = ({ className = '' }) => {
     }, [allUsers]);
 
     return (
-        <div className={`${className} ${styles.container}`}>
+        <div className={styles.container}>
             <p className={styles.title}>Pracownicy</p>
             <Button as={'link'} to={'/users/add'} className={styles.button}>
                 Dodaj pracownika

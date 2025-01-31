@@ -13,7 +13,7 @@ import Input from '@/components/atoms/input';
 import Button from '@/components/atoms/button';
 
 const Page = () => {
-    const formikRef = useRef<FormikProps<TLoginFormValues>>(null);
+    const formikRef = useRef<FormikProps<TLoginFormValues> | null>(null);
 
     const userState = useUser();
 
@@ -30,7 +30,7 @@ const Page = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Panel logowania</h1>
+            <h1>Panel logowania</h1>
             <Formik initialValues={loginFormInitialValues} onSubmit={handleSubmit} innerRef={formikRef} validationSchema={loginFormSchema}>
                 {({}) => (
                     <Form className={styles.form}>

@@ -2,7 +2,11 @@
   "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": ["error"],
-    "jsx-a11y/alt-text": "off"
+    "prettier/prettier": ["error",
+      {
+        "endOfLine": "auto"
+      }],
+    "jsx-a11y/alt-text": "off",
+    "no-console": "off"
   }
 }

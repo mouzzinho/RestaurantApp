@@ -18,7 +18,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
         <>
             {!data ? (
                 <div className={styles.container}>
-                    <LoaderIcon className={styles.loader} />
+                    <LoaderIcon />
                 </div>
             ) : (
                 <div className={styles.main}>

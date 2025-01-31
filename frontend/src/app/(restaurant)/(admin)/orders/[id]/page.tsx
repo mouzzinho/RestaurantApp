@@ -40,7 +40,7 @@ const Page = () => {
                 <BackIcon className={styles.icon} /> Wróć do listy dań
             </Link>
             <div className={styles.wrapper}>
-                <div className={styles.data}>
+                <div>
                     <p className={styles.title}>Zamówienie #{orderData.id}</p>
                     <div className={styles.column}>
                         <p className={styles.label}>Data złożenia zamówienia</p>
@@ -64,7 +64,7 @@ const Page = () => {
                         return (
                             <div key={`dish-${dish.id}`} className={styles.dish}>
                                 <img className={styles.dishImage} src={dish.image.content} alt={dish.image.name} />
-                                <div className={styles.dishData}>
+                                <div>
                                     <div className={styles.column}>
                                         <div className={styles.label}>Nazwa dania:</div>
                                         <p className={styles.value}>{dish.name}</p>

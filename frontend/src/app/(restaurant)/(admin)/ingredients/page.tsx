@@ -12,11 +12,7 @@ import Loader from '@/components/atoms/loader';
 import Button from '@/components/atoms/button';
 import SearchBar from '@/components/molecules/search-bar';
 
-interface IIngredientsProps {
-    className?: string;
-}
-
-const Page: React.FC<IIngredientsProps> = ({ className = '' }) => {
+const Page = () => {
     const ingredientState = useIngredient('list');
     const allIngredients = ingredientState.ingredients.data;
     const [ingredients, setIngredients] = useState<IIngredient[]>();
@@ -39,7 +35,7 @@ const Page: React.FC<IIngredientsProps> = ({ className = '' }) => {
     }, [allIngredients]);
 
     return (
-        <div className={`${className} ${styles.container}`}>
+        <div className={styles.container}>
             <p className={styles.title}>Składniki</p>
             <Button as={'link'} to={'/ingredients/add'} className={styles.button}>
                 Dodaj składnik

@@ -9,17 +9,13 @@ import { useOrder } from '@/hooks/use-order';
 import Loader from '@/components/atoms/loader';
 import Link from 'next/link';
 
-interface IOrdersProps {
-    className?: string;
-}
-
-const Page: React.FC<IOrdersProps> = ({ className = '' }) => {
+const Page = () => {
     const ordersState = useOrder('list');
     const orders = ordersState.orders.data;
     const sortedOrders = orders ? [...orders].sort((a, b) => parseInt(b.id.toString()) - parseInt(a.id.toString())) : [];
 
     return (
-        <div className={`${className} ${styles.container}`}>
+        <div className={styles.container}>
             <p className={styles.title}>Zamówienia</p>
             <ul className={styles.list}>
                 {!sortedOrders && <Loader />}
@@ -30,21 +26,21 @@ const Page: React.FC<IOrdersProps> = ({ className = '' }) => {
 
                         return (
                             <li key={`order-${i}`} className={styles.order}>
-                                <div className={styles.column}>
+                                <div>
                                     <p className={styles.label}>ID Zamówienia</p>
                                     <p className={styles.value}>#{order.id}</p>
                                 </div>
-                                <div className={styles.column}>
+                                <div>
                                     <p className={styles.label}>Data zamówienia</p>
                                     <p className={styles.value}>{createdAt.toLocaleDateString() + ' ' + createdAt.toLocaleTimeString()}</p>
                                 </div>
-                                <div className={styles.column}>
+                                <div>
                                     <p className={styles.label}>Status</p>
                                     <p className={`${styles.value} ${order.status === 1 ? styles.active : ''}`}>
                                         {order.status === 1 ? 'Aktywne' : 'Zakończone'}
                                     </p>
                                 </div>
-                                <div className={styles.column}>
+                                <div>
                                     <p className={styles.label} />
                                     <Link href={`/orders/${order.id}`} className={styles.value}>
                                         Szczegóły

@@ -12,11 +12,7 @@ import Loader from '@/components/atoms/loader';
 import Button from '@/components/atoms/button';
 import SearchBar from '@/components/molecules/search-bar';
 
-interface ICategoriesProps {
-    className?: string;
-}
-
-const Page: React.FC<ICategoriesProps> = ({ className = '' }) => {
+const Page = () => {
     const categoryState = useCategory('list');
     const allCategories = categoryState.categories.data;
     const [categories, setCategories] = useState<ICategory[]>();
@@ -39,7 +35,7 @@ const Page: React.FC<ICategoriesProps> = ({ className = '' }) => {
     }, [allCategories]);
 
     return (
-        <div className={`${className} ${styles.container}`}>
+        <div className={styles.container}>
             <p className={styles.title}>Kategorie</p>
             <Button as={'link'} to={'/categories/add'} className={styles.button}>
                 Dodaj kategorię
