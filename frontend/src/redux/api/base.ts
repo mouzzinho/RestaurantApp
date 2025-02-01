@@ -5,7 +5,7 @@ import { getUserTokenData } from '@/utils/getUserTokenData';
 const restaurantApi = createApi({
     reducerPath: 'restaurantApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://130.61.243.194:8080/api',
+        baseUrl: 'https://witrestaurant.my/api',
         credentials: 'include',
         prepareHeaders: (headers) => {
             const token = getUserTokenData();
