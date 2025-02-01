@@ -15,7 +15,7 @@ import Loader from '@/components/atoms/loader';
 const Kitchen = () => {
     const tableState = useTable('active');
     const tables = tableState.active.data;
-    useWebSocket('ws://witrestaurant.my//ws/tables');
+    useWebSocket('wss://witrestaurant.my//wss/tables');
 
     const handleOrder = (table: ITable) => {
         tableState.updateOrder

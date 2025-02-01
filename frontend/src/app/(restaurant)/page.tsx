@@ -14,7 +14,7 @@ import TableMenu from '@/components/molecules/table-menu';
 const Page = () => {
     const tableState = useTable('list');
     const tables = tableState.tables.data;
-    useWebSocket('ws://witrestaurant.my//ws/tables');
+    useWebSocket('wss://witrestaurant.my//wss/tables');
 
     const [selectedTable, setSelectedTable] = useState<ITable | null>(null);
 
