@@ -125,12 +125,20 @@ const Page = () => {
     }, [userState.worktime.isFetching]);
 
     useEffect(() => {
-        if (id && userState && userState.data && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') {
+        if (
+            id &&
+            userState &&
+            userState.data &&
+            userState.data.id &&
+            id.toString() !== userState.data.id.toString() &&
+            userState.data.role === 'USER'
+        ) {
             router.replace('/dashboard');
         }
     }, [userState]);
 
-    if (id && userState && userState.data && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') return null;
+    if (id && userState && userState.data && userState.data.id && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER')
+        return null;
 
     return (
         <div className={`${styles.container} ${isLoading ? styles.loading : ''}`}>
