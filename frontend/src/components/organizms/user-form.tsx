@@ -136,7 +136,11 @@ const UserForm: React.FC<IUserForm> = ({ isDashboard, className }) => {
                             <BackIcon className={styles.icon} /> Wróć do listy pracowników
                         </Link>
                     )}
-                    <Button as={'link'} to={`/users/worktime?id=${workerData ? workerData?.id : userData.id}`} className={styles.worktime}>
+                    <Button
+                        as={'link'}
+                        to={`/users/worktime?id=${workerData ? workerData?.id : userData && userData.id ? userData.id : ''}`}
+                        className={styles.worktime}
+                    >
                         Zobacz grafik
                     </Button>
                     <Form className={styles.form}>
@@ -225,11 +229,17 @@ const UserForm: React.FC<IUserForm> = ({ isDashboard, className }) => {
                             </Button>
                         </div>
                     </Form>
-                    {workerData && userData && userData.role === 'ADMIN' && workerData.id !== userData.id && workerData.id !== 1 && (
-                        <button className={styles.delete} onClick={handleDelete} type={'button'}>
-                            <DeleteIcon /> Usuń pracownika
-                        </button>
-                    )}
+                    {workerData &&
+                        userData &&
+                        userData.role === 'ADMIN' &&
+                        userData &&
+                        userData.id &&
+                        workerData.id !== userData.id &&
+                        workerData.id !== 1 && (
+                            <button className={styles.delete} onClick={handleDelete} type={'button'}>
+                                <DeleteIcon /> Usuń pracownika
+                            </button>
+                        )}
                 </div>
             )}
         </Formik>
