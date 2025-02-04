@@ -125,17 +125,16 @@ const Page = () => {
     }, [userState.worktime.isFetching]);
 
     useEffect(() => {
-        if (id && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') {
+        if (id && userState && userState.data && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') {
             router.replace('/dashboard');
         }
     }, [userState]);
 
-    if (id && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') return null;
+    if (id && userState && userState.data && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') return null;
 
     return (
         <div className={`${styles.container} ${isLoading ? styles.loading : ''}`}>
-            {userState.data.role !== 'ADMIN'}
-            <Link href={userState.data.role === 'USER' ? '/dashboard' : `/users/${id}`} className={styles.link}>
+            <Link href={userState && userState.data && userState.data.role === 'USER' ? '/dashboard' : `/users/${id}`} className={styles.link}>
                 <BackIcon className={styles.icon} /> Wróć do profilu
             </Link>
             <div className={`${styles.calendarContainer} ${areRibbonsHidden ? styles.loading : ''}`}>
