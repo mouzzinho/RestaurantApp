@@ -36,12 +36,12 @@ const Page = () => {
     };
 
     useEffect(() => {
-        if (userState.data.role === 'USER') {
+        if (userState && userState.data && userState.data.role === 'USER') {
             router.replace('/dashboard');
         }
     }, [userState]);
 
-    if (!orderData || userState.data.role === 'USER') return null;
+    if (!orderData || (userState && userState.data && userState.data.role === 'USER')) return null;
 
     return (
         <div className={styles.container}>
