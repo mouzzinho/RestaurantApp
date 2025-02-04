@@ -12,6 +12,9 @@ import { toast } from 'react-toastify';
 import Button from '@/components/atoms/button';
 import Loader from '@/components/atoms/loader';
 
+// useWebSocket('wss://witrestaurant.my//wss/tables');
+// useWebSocket('ws://localhost:8080//ws/tables');
+
 const Kitchen = () => {
     const tableState = useTable('active');
     const tables = tableState.active.data;

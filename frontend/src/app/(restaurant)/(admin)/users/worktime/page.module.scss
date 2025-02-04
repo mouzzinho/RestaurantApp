@@ -1,5 +1,10 @@
 .container {
 
+  &.loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   .link {
     font-size: 16px;
     color: var(--color-primary-active);

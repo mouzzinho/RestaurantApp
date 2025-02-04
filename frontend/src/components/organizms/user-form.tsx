@@ -136,7 +136,7 @@ const UserForm: React.FC<IUserForm> = ({ isDashboard, className }) => {
                             <BackIcon className={styles.icon} /> Wróć do listy pracowników
                         </Link>
                     )}
-                    <Button as={'link'} to={`/users/worktime?id=${workerData?.id}`} className={styles.worktime}>
+                    <Button as={'link'} to={`/users/worktime?id=${workerData ? workerData?.id : userData.id}`} className={styles.worktime}>
                         Zobacz grafik
                     </Button>
                     <Form className={styles.form}>

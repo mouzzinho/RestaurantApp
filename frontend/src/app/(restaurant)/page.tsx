@@ -11,6 +11,9 @@ import useWebSocket from '@/hooks/use-websocket';
 import Restaurant from '@/components/organizms/restaurant';
 import TableMenu from '@/components/molecules/table-menu';
 
+// useWebSocket('wss://witrestaurant.my//wss/tables');
+// useWebSocket('ws://localhost:8080//ws/tables');
+
 const Page = () => {
     const tableState = useTable('list');
     const tables = tableState.tables.data;

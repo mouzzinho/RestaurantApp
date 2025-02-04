@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { Form, Formik, FormikProps } from 'formik';
 import Calendar, { CalendarProps } from 'react-calendar';
@@ -36,6 +36,7 @@ const Page = () => {
     const params = useSearchParams();
     const id = params.get('id') || '';
     const dispatch = useDispatch();
+    const router = useRouter();
     const calendarRef = useRef<CalendarProps>();
     const formRef = useRef<FormikProps<{ date_start: string; date_end: string }>>(null);
     const [selectedDate, setSelectedDate] = useState<IDateData>();
@@ -44,6 +45,8 @@ const Page = () => {
     const [areRibbonsHidden, setAreaRibbonsHidden] = useState(false);
     const userState = useUser('worktime', yearAndMonth, id);
     const worktimes = getWorktime(userState.worktime.data);
+    const isLoading =
+        userState.createWorktime.isLoading || userState.updateWorktime.isLoading || userState.worktime.isLoading || userState.worktime.isFetching;
 
     const handleDayChange = (date: Date, event: React.MouseEvent<HTMLButtonElement>) => {
         [...document.querySelectorAll('.react-calendar__tile')].forEach((button) => button.classList.remove('selected'));
@@ -121,9 +124,18 @@ const Page = () => {
         }
     }, [userState.worktime.isFetching]);
 
+    useEffect(() => {
+        if (id && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') {
+            router.replace('/dashboard');
+        }
+    }, [userState]);
+
+    if (id && id.toString() !== userState.data.id.toString() && userState.data.role === 'USER') return null;
+
     return (
-        <div className={styles.container}>
-            <Link href={`/users/${id}`} className={styles.link}>
+        <div className={`${styles.container} ${isLoading ? styles.loading : ''}`}>
+            {userState.data.role !== 'ADMIN'}
+            <Link href={userState.data.role === 'USER' ? '/dashboard' : `/users/${id}`} className={styles.link}>
                 <BackIcon className={styles.icon} /> Wróć do profilu
             </Link>
             <div className={`${styles.calendarContainer} ${areRibbonsHidden ? styles.loading : ''}`}>

@@ -2,18 +2,21 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import styles from './page.module.scss';
+
 import BackIcon from '../../../../../../public/back.svg';
-
 import { useOrder } from '@/hooks/use-order';
-
+import { useUser } from '@/hooks/use-user';
 import { toast } from 'react-toastify';
+
 import Button from '@/components/atoms/button';
 
 const Page = () => {
     const router = useRouter();
     const orderState = useOrder('single');
+    const userState = useUser();
     const orderData = orderState.get.data;
     const date = orderData ? new Date(orderData.order_date) : new Date();
 
@@ -32,7 +35,13 @@ const Page = () => {
         }
     };
 
-    if (!orderData) return null;
+    useEffect(() => {
+        if (userState.data.role === 'USER') {
+            router.replace('/dashboard');
+        }
+    }, [userState]);
+
+    if (!orderData || userState.data.role === 'USER') return null;
 
     return (
         <div className={styles.container}>

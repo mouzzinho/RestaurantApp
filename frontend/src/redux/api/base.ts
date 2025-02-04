@@ -2,6 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { getUserTokenData } from '@/utils/getUserTokenData';
 
+// baseUrl: 'https://witrestaurant.my/api',
+// baseUrl: 'http://localhost:8080/api',
+
 const restaurantApi = createApi({
     reducerPath: 'restaurantApi',
     baseQuery: fetchBaseQuery({

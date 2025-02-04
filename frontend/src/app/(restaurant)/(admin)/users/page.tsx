@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import styles from './page.module.scss';
 
@@ -16,6 +17,7 @@ const Page = () => {
     const userState = useUser('list');
     const allUsers = userState.users.data;
     const [users, setUsers] = useState<IUser[]>();
+    const router = useRouter();
 
     const handleChange = (values: { search: string }) => {
         if (allUsers) {
@@ -33,6 +35,14 @@ const Page = () => {
             setUsers(sortedUsers);
         }
     }, [allUsers]);
+
+    useEffect(() => {
+        if (userState.data.role === 'USER') {
+            router.replace('/dashboard');
+        }
+    }, [userState]);
+
+    if (userState.data.role === 'USER') return null;
 
     return (
         <div className={styles.container}>

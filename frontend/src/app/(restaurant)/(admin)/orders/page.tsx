@@ -1,24 +1,37 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import styles from './page.module.scss';
 
 import { useOrder } from '@/hooks/use-order';
+import { useUser } from '@/hooks/use-user';
 
 import Loader from '@/components/atoms/loader';
-import Link from 'next/link';
 
 const Page = () => {
+    const userState = useUser();
+    const router = useRouter();
     const ordersState = useOrder('list');
     const orders = ordersState.orders.data;
     const sortedOrders = orders ? [...orders].sort((a, b) => parseInt(b.id.toString()) - parseInt(a.id.toString())) : [];
+    const isLoading = ordersState.orders.isLoading;
+
+    useEffect(() => {
+        if (userState.data.role === 'USER') {
+            router.replace('/dashboard');
+        }
+    }, [userState]);
+
+    if (userState.data.role === 'USER') return null;
 
     return (
         <div className={styles.container}>
             <p className={styles.title}>Zamówienia</p>
             <ul className={styles.list}>
-                {!sortedOrders && <Loader />}
+                {(!sortedOrders || sortedOrders.length === 0) && isLoading && <Loader />}
                 {sortedOrders &&
                     sortedOrders.length > 0 &&
                     sortedOrders.map((order, i) => {
@@ -49,7 +62,7 @@ const Page = () => {
                             </li>
                         );
                     })}
-                {sortedOrders && sortedOrders.length === 0 && <p className={styles.empty}>Lista zamówień jest pusta</p>}
+                {sortedOrders && sortedOrders.length === 0 && !isLoading && <p className={styles.empty}>Lista zamówień jest pusta</p>}
             </ul>
         </div>
     );
